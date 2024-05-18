@@ -167,8 +167,9 @@ const getTargetExp = (value) => {
 	return targetExp;
 };
 
-$slots.addEventListener('input', (event) => {
+$slots.addEventListener('input', (_event) => {
 	let slots = parseInt(event.target.value);
+	// let slots = parseInt($slots.value);
 	let targetValue = parseInt($targetLevel.value);
 	let currentLevel = parseInt($currentLevel.value);
 	validateOk(slots, targetValue, currentLevel);
@@ -240,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		$craftExp.value = expBySlot[slots - 2];
 	}
 
-	$bonus.addEventListener('change', function () {
+	$bonus.addEventListener('input', function () {
 		if ($bonus.checked) {
 			$craftExp.value = expBySlotBonus[slots - 2];
 		} else {
