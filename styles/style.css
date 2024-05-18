@@ -1,0 +1,304 @@
+/* RESET */
+* {
+	margin: 0;
+	padding: 0;
+	font: inherit;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	hanging-punctuation: first last;
+	color-scheme: light dark;
+	font-family: 'Montserrat Variable', sans-serif;
+	font-size: 62.5%;
+}
+
+img,
+picture,
+video,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	text-wrap: balance;
+}
+
+p {
+	font-size: 1.5rem;
+	max-width: 75ch;
+	margin-bottom: 2rem;
+	text-wrap: pretty;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	:has(:target) {
+		scroll-behavior: smooth;
+		scroll-padding-top: 3rem;
+	}
+}
+
+/* END RESET */
+
+/* montserrat-latin-wght-normal */
+@font-face {
+	font-family: 'Montserrat Variable';
+	font-style: normal;
+	font-display: swap;
+	font-weight: 100 900;
+	src: url(https://cdn.jsdelivr.net/fontsource/fonts/montserrat:vf@latest/latin-wght-normal.woff2)
+		format('woff2-variations');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+		U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+		U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+main {
+	width: 100vw;
+	min-height: 100vh;
+	background-color: var(--bg-primary);
+	padding-block: 3rem;
+}
+
+h1 {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	font-size: 3rem;
+	font-weight: 700;
+	text-align: center;
+	text-shadow: 0 0 0.4rem var(--color-style-1);
+	color: var(--title-color);
+	margin-block: 2rem;
+}
+
+#calculator {
+	display: flex;
+	flex-direction: column;
+
+	border: 1px solid
+		color-mix(in srgb, var(--color-style-3), var(--bg-primary) 20%);
+	border-radius: 4px;
+	background-color: color-mix(
+		in srgb,
+		var(--color-style-3),
+		var(--bg-primary) 60%
+	);
+
+	box-shadow: 0 0 0 0.2rem var(--text-color);
+
+	width: 310px;
+	min-height: 89.4rem;
+	padding: 1rem;
+	margin: 0 auto;
+
+	& .label-input-group {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 1.6rem;
+	}
+
+	& label {
+		font-size: 1.6rem;
+		font-weight: 400;
+		color: var(--text-color);
+		text-shadow: 0 0 0.4rem var(--color-style-1);
+		margin-bottom: 0.5rem;
+		text-wrap: balance;
+		width: 60%;
+	}
+
+	& input {
+		font-size: 1.6rem;
+		color: var(--title-color);
+		text-align: center;
+		padding: 0.2rem 0.5rem;
+
+		border-radius: 4px;
+		border: none;
+		background-color: transparent;
+	}
+
+	& .calculator-input {
+		width: 30%;
+		max-height: 26px;
+	}
+
+	& fieldset {
+		border: none;
+		margin: 2.4rem 0 0;
+		min-height: 128px;
+	}
+
+	& .why-not {
+		font-size: 2rem;
+		font-weight: 500;
+		text-align: center;
+		text-wrap: balance;
+		color: var(--text-color);
+		text-shadow: 0 0 0.4rem var(--color-style-1);
+	}
+
+	& .bonus-group {
+		display: flex;
+		justify-content: center;
+		align-content: center;
+
+		min-height: 32px;
+		margin: 0 auto 2.4rem;
+
+		& label {
+			font-weight: 600;
+		}
+
+		& #input-bonus {
+			width: 22%;
+		}
+
+		& #input-bonus:hover {
+			cursor: pointer;
+		}
+
+		& #input-bonus:checked {
+			accent-color: var(--color-style-1);
+		}
+
+		& #input-bonus:focus {
+			outline: none;
+		}
+	}
+
+	& button {
+		font-size: 1.6rem;
+		text-transform: uppercase;
+		font-weight: bold;
+		letter-spacing: 0.2rem;
+		color: var(--text-negative);
+		text-shadow: 0 0 0.3rem var(--text-color);
+
+		background-color: var(--color-style-1);
+		border: 1px outset var(--text-negative);
+		border-radius: 4px 40px 40px 40px;
+		outline: none;
+
+		box-shadow: 0 5px 0 var(--text-color);
+		width: 60%;
+		height: 50px;
+		padding: 0.2rem 0.5rem;
+		margin: 1.6rem auto 4rem auto;
+
+		transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+			transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+	}
+
+	& button:hover {
+		background-color: var(--color-style-2);
+		cursor: pointer;
+	}
+
+	& button:active {
+		background-color: var(--color-style-3);
+		border-style: inset;
+		outline: none;
+		transform: translateY(0.2rem);
+		box-shadow: 0 2px 0 var(--text-color);
+	}
+
+	& button:focus {
+		/* outline: 0.2rem solid var(--color-style-3); */
+		outline: none;
+	}
+
+	& button:disabled {
+		background-color: var(--text-low);
+		cursor: default;
+		color: color-mix(in srgb, var(--text-negative), var(--pure-black) 90%);
+		transform: none;
+		box-shadow: none;
+	}
+
+	& button:disabled:hover {
+		background-color: var(--invalid-input);
+		color: var(--text-negative);
+		animation: vibration 0.2s linear 0.2s infinite;
+	}
+
+	& input:disabled {
+		color: var(--text-low);
+	}
+
+	& input:invalid {
+		background-color: var(--invalid-input);
+		outline: 0.2rem solid
+			color-mix(in srgb, var(--color-style-3), var(--text-negative) 50%);
+	}
+
+	& input:focus {
+		outline: 0.2rem solid var(--color-style-1);
+	}
+
+	& .ok-group {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+
+		& label {
+			width: auto;
+		}
+	}
+
+	& #input-valid-ok {
+		font-weight: 700;
+		background-color: var(--valid-input);
+		color: var(--pure-black);
+	}
+
+	& .input-invalid-ok {
+		background-color: var(--invalid-input) !important;
+		color: var(--pure-white) !important;
+	}
+
+	& .total-hide {
+		opacity: 0;
+	}
+
+	& .total-show {
+		& p {
+			text-align: center;
+			text-shadow: 0 0 0.4rem var(--color-style-1);
+			min-height: 4.8rem;
+		}
+
+		& span {
+			font-size: 2.4rem;
+			font-weight: 700;
+			color: var(--title-color);
+			text-shadow: 0 0 0.4rem var(--color-style-1);
+		}
+	}
+}
+
+@keyframes vibration {
+	0% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(4deg);
+	}
+	50% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(-4deg);
+	}
+}

@@ -1,0 +1,26 @@
+:root {
+	--pure-white: #ffffff;
+	--pure-black: #000000;
+
+	--bg-primary: #f7f7f8;
+	--bg-secondary: #efeff1;
+	--bg-accent: #adadb838;
+
+	--color-style-1: #9147ff;
+	--color-style-2: #5c16c5;
+	--color-style-3: #45109399;
+
+	--title-color: #0e0e10;
+	--text-color: #1f1f23;
+	--text-light: #18181b;
+	--text-low: #84848f;
+	--text-style: #5c16c5;
+	--text-negative: #f7f7f8;
+
+	--valid-input: #00ff99;
+	--invalid-input: #ff0066;
+
+	--interactive-normal: #0099ff;
+	--interactive-hover: #0066cc;
+	--interactive-active: #003399;
+}
