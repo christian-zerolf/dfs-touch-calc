@@ -132,6 +132,8 @@ $currentLevel.addEventListener('input', (event) => {
 	let slots = parseInt($slots.value);
 	let targetValue = parseInt($targetLevel.value);
 	$currentExp.value = expData[$currentLevel.value];
+	let currentExp = parseInt($currentExp.value);
+	getNeededExp(currentExp, getTargetExp(targetValue));
 	validateOk(slots, targetValue, currentLevel);
 });
 
@@ -168,8 +170,8 @@ const getTargetExp = (value) => {
 };
 
 $slots.addEventListener('input', (_event) => {
-	let slots = parseInt(event.target.value);
-	// let slots = parseInt($slots.value);
+	// let slots = parseInt(event.target.value);
+	let slots = parseInt($slots.value);
 	let targetValue = parseInt($targetLevel.value);
 	let currentLevel = parseInt($currentLevel.value);
 	validateOk(slots, targetValue, currentLevel);

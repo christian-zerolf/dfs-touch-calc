@@ -1,4 +1,3 @@
-/* RESET */
 * {
 	margin: 0;
 	padding: 0;
@@ -49,9 +48,6 @@ p {
 	}
 }
 
-/* END RESET */
-
-/* montserrat-latin-wght-normal */
 @font-face {
 	font-family: 'Montserrat Variable';
 	font-style: normal;
@@ -97,7 +93,9 @@ h1 {
 
 	box-shadow: 0 0 0 0.2rem var(--text-color);
 
-	width: 320px;
+	min-width: 310px;
+	max-width: 474px;
+	/* width: 320px; */
 	min-height: 89.4rem;
 	padding: 1rem;
 	margin: 0 auto;
