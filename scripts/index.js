@@ -105,9 +105,7 @@ const expData = [
 const expBySlot = [10, 25, 50, 100, 250, 500, 1000];
 const expBySlotBonus = [15, 37, 75, 150, 375, 750, 1500];
 
-const validInputColor = '#0f9';
-const invalidInputColor = 'red';
-
+const inputs = document.querySelectorAll('input');
 const $currentLevel = document.querySelector('#input-current-level');
 const $currentExp = document.querySelector('#input-current-exp');
 const $targetLevel = document.querySelector('#input-target-level');
@@ -134,7 +132,7 @@ $currentLevel.addEventListener('input', (event) => {
 	$currentExp.value = expData[$currentLevel.value];
 	let currentExp = parseInt($currentExp.value);
 	getNeededExp(currentExp, getTargetExp(targetValue));
-	validateOk(slots, targetValue, currentLevel);
+	validateOk(slots, targetValue, currentLevel, currentExp);
 });
 
 $currentExp.addEventListener('input', (event) => {
@@ -143,8 +141,7 @@ $currentExp.addEventListener('input', (event) => {
 	let slots = parseInt($slots.value);
 	let targetValue = parseInt($targetLevel.value);
 	getNeededExp(currentExp, getTargetExp(targetValue));
-
-	validateOk(slots, targetValue, currentLevel);
+	validateOk(slots, targetValue, currentLevel, currentExp);
 });
 
 $targetLevel.addEventListener('input', (event) => {
@@ -153,7 +150,7 @@ $targetLevel.addEventListener('input', (event) => {
 	getNeededExp(currentExp, getTargetExp(targetValue));
 	let slots = parseInt($slots.value);
 	let currentLevel = parseInt($currentLevel.value);
-	validateOk(slots, targetValue, currentLevel);
+	validateOk(slots, targetValue, currentLevel, currentExp);
 });
 
 const getNeededExp = (current, target) => {
@@ -169,12 +166,13 @@ const getTargetExp = (value) => {
 	return targetExp;
 };
 
-$slots.addEventListener('input', (_event) => {
-	// let slots = parseInt(event.target.value);
-	let slots = parseInt($slots.value);
+$slots.addEventListener('input', (event) => {
+	let slots = parseInt(event.target.value);
+	// let slots = parseInt($slots.value);
 	let targetValue = parseInt($targetLevel.value);
 	let currentLevel = parseInt($currentLevel.value);
-	validateOk(slots, targetValue, currentLevel);
+	let currentExp = parseInt($currentExp.value);
+	validateOk(slots, targetValue, currentLevel, currentExp);
 
 	if ($bonus.checked) {
 		$craftExp.value = expBySlotBonus[slots - 2];
@@ -191,8 +189,23 @@ $slots.addEventListener('input', (_event) => {
 	});
 });
 
-const validateOk = (slot, target, level) => {
-	if (level >= target) {
+const validateOk = (slot, target, level, exp) => {
+	if (
+		isNaN(slot) ||
+		isNaN(target) ||
+		isNaN(level) ||
+		isNaN(exp) ||
+		slot < 2 ||
+		slot > 7 ||
+		target < 1 ||
+		target > 100 ||
+		level < 1 ||
+		level > 99
+	) {
+		$validOk.value = 'NO';
+		$validOk.classList.add('input-invalid-ok');
+		$whyNot.textContent = 'Por favor, verifica todos los campos';
+	} else if (level >= target) {
 		$validOk.value = 'NO';
 		$validOk.classList.add('input-invalid-ok');
 		$whyNot.textContent =
@@ -235,7 +248,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	let slots = parseInt($slots.value);
 	let targetValue = parseInt($targetLevel.value);
 	let currentLevel = parseInt($currentLevel.value);
-	validateOk(slots, targetValue, currentLevel);
 
 	if ($bonus.checked) {
 		$craftExp.value = expBySlotBonus[slots - 2];
@@ -252,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 	let currentExp = parseInt($currentExp.value);
-
+	validateOk(slots, targetValue, currentLevel, currentExp);
 	getNeededExp(currentExp, getTargetExp(targetValue));
 });
 
@@ -281,7 +293,6 @@ function showTotalDiv() {
 	$divTotal.classList.add('total-show');
 }
 
-const inputs = document.querySelectorAll('input');
 inputs.forEach((input) => {
 	input.addEventListener('change', () => {
 		$divTotal.classList.add('total-hide');
@@ -291,7 +302,7 @@ inputs.forEach((input) => {
 
 inputs.forEach((input) => {
 	input.addEventListener('input', () => {
-		if ($validOk.value === 'NO') {
+		if ($validOk.value === 'NO' || input.value === undefined) {
 			$calculateButton.disabled = true;
 		} else {
 			$calculateButton.disabled = false;
