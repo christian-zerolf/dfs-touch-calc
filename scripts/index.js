@@ -168,7 +168,6 @@ const getTargetExp = (value) => {
 
 $slots.addEventListener('input', (event) => {
 	let slots = parseInt(event.target.value);
-	// let slots = parseInt($slots.value);
 	let targetValue = parseInt($targetLevel.value);
 	let currentLevel = parseInt($currentLevel.value);
 	let currentExp = parseInt($currentExp.value);
@@ -202,11 +201,11 @@ const validateOk = (slot, target, level, exp) => {
 		level < 1 ||
 		level > 99
 	) {
-		$validOk.value = 'NO';
+		$validOk.value = 'ERROR';
 		$validOk.classList.add('input-invalid-ok');
 		$whyNot.textContent = 'Por favor, verifica todos los campos';
 	} else if (level >= target) {
-		$validOk.value = 'NO';
+		$validOk.value = 'ERROR';
 		$validOk.classList.add('input-invalid-ok');
 		$whyNot.textContent =
 			'El nivel de oficio objetivo debe ser mayor al actual';
@@ -215,7 +214,7 @@ const validateOk = (slot, target, level, exp) => {
 		(target > 60 && slot < 3) ||
 		(target > 40 && slot < 2)
 	) {
-		$validOk.value = 'NO';
+		$validOk.value = 'ERROR';
 		$validOk.classList.add('input-invalid-ok');
 		$whyNot.textContent = 'Cantidad de Ranuras en la receta es muy bajo';
 	} else if (
@@ -225,7 +224,7 @@ const validateOk = (slot, target, level, exp) => {
 		(level < 20 && slot >= 4) ||
 		(level < 10 && slot >= 3)
 	) {
-		$validOk.value = 'NO';
+		$validOk.value = 'ERROR';
 		$validOk.classList.add('input-invalid-ok');
 		$whyNot.textContent =
 			'Tu nivel de Oficio no te permite fabricar esta receta';
@@ -234,7 +233,7 @@ const validateOk = (slot, target, level, exp) => {
 		$currentExp.value >= expData[$targetLevel.value] ||
 		$currentExp.value >= expData[parseInt($currentLevel.value) + 1]
 	) {
-		$validOk.value = 'NO';
+		$validOk.value = 'ERROR';
 		$validOk.classList.add('input-invalid-ok');
 		$whyNot.textContent = 'Revisa tu experiencia o nivel de oficio';
 	} else {
@@ -279,7 +278,7 @@ function calculateTotal() {
 		total <= 0 ||
 		isNaN(total) ||
 		total === Infinity ||
-		$validOk.value === 'NO'
+		$validOk.value === 'ERROR'
 	) {
 		$divTotal.classList.add('total-hide');
 		$divTotal.classList.remove('total-show');
@@ -302,7 +301,7 @@ inputs.forEach((input) => {
 
 inputs.forEach((input) => {
 	input.addEventListener('input', () => {
-		if ($validOk.value === 'NO' || input.value === undefined) {
+		if ($validOk.value === 'ERROR' || input.value === undefined) {
 			$calculateButton.disabled = true;
 		} else {
 			$calculateButton.disabled = false;
