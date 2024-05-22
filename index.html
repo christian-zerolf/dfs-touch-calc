@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dofus Touch: Calculadora de Oficios</title>
+		<link rel="shortcut icon" href="favicon.svg" type="image/x-icon" />
+
+		<link rel="stylesheet" href="./src/styles/style.css" />
+		<script type="module" src="./src/scripts/main.js"></script>
+		<script type="module" src="./src/scripts/toggle.js"></script>
+	</head>
+	<body>
+		<main>
+			<div id="calculator">
+				<header>
+					<h1>Calculadora Touch</h1>
+					<nav>
+						<ul>
+							<li>
+								<div id="toggle">
+									<div id="toggle-switch"></div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</header>
+
+				<div class="label-input-group">
+					<label for="input-current-level">Nivel de Oficio Actual?</label>
+					<input
+						id="input-current-level"
+						class="calculator-input"
+						type="number"
+						name=""
+						min="1"
+						max="99"
+						step="1"
+						pattern="[0-9]+"
+						required
+						value="1"
+					/>
+				</div>
+
+				<div class="label-input-group">
+					<label for="input-current-exp">Experiencia de Oficio Actual?</label>
+					<input
+						id="input-current-exp"
+						class="calculator-input"
+						type="number"
+						name=""
+						min="0"
+						max="581687"
+						step="1"
+						pattern="[0-9]+"
+						required
+						value="0"
+					/>
+				</div>
+
+				<div class="label-input-group">
+					<label for="input-target-level">Nivel Objetivo?</label>
+					<input
+						id="input-target-level"
+						class="calculator-input"
+						type="number"
+						name=""
+						min="2"
+						max="100"
+						step="1"
+						pattern="[0-9]+"
+						required
+						value="2"
+					/>
+				</div>
+
+				<div class="label-input-group">
+					<label for="input-target-exp">Experiencia Objetivo </label>
+					<input
+						id="input-target-exp"
+						class="calculator-input"
+						type="number"
+						name=""
+						required
+						disabled
+					/>
+				</div>
+
+				<div class="label-input-group">
+					<label for="input-needed-exp">Experiencia Necesaria</label>
+					<input
+						id="input-needed-exp"
+						class="calculator-input"
+						type="number"
+						name=""
+						required
+						disabled
+					/>
+				</div>
+
+				<div class="label-input-group">
+					<label for="input-slots">Numero de ranuras de fabricacion?</label>
+					<input
+						id="input-slots"
+						class="calculator-input"
+						type="number"
+						name=""
+						min="2"
+						max="7"
+						step="1"
+						pattern="[0-9]+"
+						required
+						value="2"
+					/>
+				</div>
+
+				<div class="label-input-group">
+					<label for="input-craft-exp">Experiencia por fabricacion</label>
+					<input
+						id="input-craft-exp"
+						class="calculator-input"
+						type="number"
+						name=""
+						required
+						disabled
+					/>
+				</div>
+				<hr />
+				<fieldset>
+					<div class="label-input-group ok-group">
+						<!-- <label for="input-valid-ok">OK?</label> -->
+						<input
+							id="input-valid-ok"
+							class="calculator-input"
+							type="text"
+							name=""
+							disabled
+						/>
+					</div>
+
+					<p class="why-not"></p>
+				</fieldset>
+
+				<div class="bonus-group">
+					<label for="input-bonus">Bonus Activo</label>
+					<input
+						id="input-bonus"
+						class="calculator-input-bonus"
+						type="checkbox"
+						name=""
+					/>
+				</div>
+
+				<button class="calculator-button">Calcular</button>
+
+				<div class="total total-hide">
+					<p class="total-text">
+						Necesitas Fabricar
+						<span id="input-total" class="total-value"></span> Items
+					</p>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
