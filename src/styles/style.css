@@ -1,0 +1,415 @@
+body {
+	--bg-primary: #f7f7f8;
+	--bg-secondary: #efeff1;
+	--bg-accent: #adadb838;
+
+	--color-style-1: #9147ff;
+	--color-style-2: #5c16c5;
+	--color-style-3: #45109399;
+
+	--title-color: #0e0e10;
+	--text-color: #1f1f23;
+	--text-light: #18181b;
+	--text-low: #84848f;
+	--text-style: #5c16c5;
+	--text-negative: #f7f7f8;
+
+	--valid-input: #00ff99;
+	--invalid-input: #ff0066;
+}
+
+body.dark {
+	--bg-primary: #0e0e10;
+	--bg-secondary: #18181b;
+	--bg-accent: #1f1f23;
+
+	--color-style-1: #9147ff;
+	--color-style-2: #5c16c5;
+	--color-style-3: #451093;
+
+	--title-color: #f7f7f8;
+	--text-color: #efeff1;
+	--text-light: #f7f7f8;
+	--text-low: #cecece;
+	--text-style: #5c16c5;
+	--text-negative: #f7f7f8;
+
+	--valid-input: #00ff99;
+	--invalid-input: #ff0066;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font: inherit;
+
+	transition: color 0.4s ease-in-out, background-color 0.4s ease-in-out,
+		border-color 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	hanging-punctuation: first last;
+	font-family: 'Montserrat Variable', sans-serif;
+	font-size: 62.5%;
+}
+
+img,
+picture,
+video,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	text-wrap: balance;
+}
+
+p {
+	font-size: 1.5rem;
+	max-width: 75ch;
+	margin-bottom: 2rem;
+	text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	:has(:target) {
+		scroll-behavior: smooth;
+		scroll-padding-top: 3rem;
+	}
+}
+
+@font-face {
+	font-family: 'Montserrat Variable';
+	font-style: normal;
+	font-display: swap;
+	font-weight: 100 900;
+	src: url(https://cdn.jsdelivr.net/fontsource/fonts/montserrat:vf@latest/latin-wght-normal.woff2)
+		format('woff2-variations');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+		U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+		U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+body {
+	width: 100vw;
+}
+
+hr {
+	border: 1px solid var(--color-style-3);
+}
+
+main {
+	width: 100%;
+	background-color: var(--bg-primary);
+	padding: 3rem 1rem;
+}
+
+header {
+	display: flex;
+	flex-direction: column-reverse;
+
+	& li {
+		list-style: none;
+	}
+
+	& h1 {
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+			Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+			sans-serif;
+		font-size: 3rem;
+		font-weight: 700;
+		text-align: center;
+		text-shadow: 0 0 0.4rem var(--color-style-1);
+		color: var(--title-color);
+		margin: 2rem auto 4rem;
+	}
+
+	& #toggle {
+		position: relative;
+		width: 48px;
+		height: 24px;
+		border: 1px solid var(--title-color);
+		border-radius: 50px;
+		background-color: color-mix(
+			in srgb,
+			var(--color-style-3) 10%,
+			var(--bg-secondary) 50%
+		);
+		box-shadow: 0px 0px 6px
+				color-mix(in srgb, var(--color-style-1) 50%, var(--title-color) 50%),
+			inset 0px 0px 6px
+				color-mix(in srgb, var(--color-style-1) 50%, var(--title-color) 50%);
+		cursor: pointer;
+
+		& #toggle-switch {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 20px;
+			height: 20px;
+			background-color: var(--color-style-1);
+			border-radius: 50%;
+
+			box-shadow: 2px 2px 6px var(--title-color),
+				-2px -2px 6px var(--title-color);
+
+			transform: scale(0.7);
+
+			transition: left 0.5s ease-in-out;
+			margin: 0;
+		}
+
+		&.active #toggle-switch {
+			background-color: var(--color-style-3);
+			left: 26px;
+		}
+
+		&:hover {
+			box-shadow: 0px 0px 12px
+					color-mix(in srgb, var(--color-style-1) 50%, var(--title-color) 50%),
+				inset 0px 0px 12px
+					color-mix(in srgb, var(--color-style-1) 50%, var(--title-color) 50%);
+		}
+	}
+}
+
+#calculator {
+	display: flex;
+	flex-direction: column;
+
+	border: 1px solid
+		color-mix(in srgb, var(--color-style-3) 70%, var(--bg-primary) 20%);
+	border-radius: 4px;
+	background-color: color-mix(
+		in srgb,
+		var(--color-style-3) 10%,
+		var(--bg-secondary) 50%
+	);
+	box-shadow: 0 0 0 0.2rem var(--text-color);
+
+	min-width: 300px;
+	max-width: 600px;
+	padding: 2rem;
+	margin: 0 auto;
+
+	& .label-input-group {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 1.6rem;
+	}
+
+	& label {
+		font-size: 1.6rem;
+		font-weight: 400;
+		color: var(--text-color);
+		text-shadow: 0 0 0.4rem var(--color-style-1);
+		margin-bottom: 0.5rem;
+		text-wrap: balance;
+		width: 60%;
+	}
+
+	& input {
+		font-size: 1.6rem;
+		color: var(--title-color);
+		text-align: center;
+		padding: 0.2rem 0.5rem;
+
+		border-radius: 4px;
+		border: 1px solid var(--color-style-2);
+		background-color: transparent;
+	}
+
+	& input:disabled,
+	#input-bonus {
+		border: none;
+	}
+
+	& .calculator-input {
+		width: 30%;
+		max-height: 26px;
+	}
+
+	& fieldset {
+		border: none;
+		margin: 2.4rem 0 0;
+		min-height: 128px;
+	}
+
+	& .why-not {
+		font-size: 2rem;
+		font-weight: 500;
+		text-align: center;
+		text-wrap: balance;
+		color: var(--text-color);
+		text-shadow: 0 0 0.4rem var(--color-style-1);
+	}
+
+	& .bonus-group {
+		display: flex;
+		justify-content: center;
+		align-content: center;
+
+		width: max-content;
+		min-height: 32px;
+		margin: 0 auto 2.4rem;
+
+		& label {
+			width: 100%;
+			font-weight: 600;
+			cursor: pointer;
+		}
+
+		& #input-bonus {
+			width: 100%;
+		}
+
+		& #input-bonus:hover {
+			cursor: pointer;
+		}
+
+		& #input-bonus:checked {
+			accent-color: var(--color-style-1);
+		}
+
+		& #input-bonus:focus {
+			outline: none;
+		}
+	}
+
+	& button {
+		font-size: 1.6rem;
+		text-transform: uppercase;
+		font-weight: bold;
+		letter-spacing: 0.2rem;
+		color: var(--text-negative);
+		text-shadow: 0 0 0.3rem var(--text-color);
+
+		background-color: var(--color-style-1);
+		border: 1px outset var(--text-negative);
+		border-radius: 4px 40px 40px 40px;
+		outline: none;
+
+		box-shadow: 0 5px 0 var(--text-color);
+		width: 60%;
+		height: 50px;
+		padding: 0.2rem 0.5rem;
+		margin: 1.6rem auto 4rem auto;
+
+		transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+			transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+	}
+
+	& button:hover {
+		background-color: var(--color-style-2);
+		cursor: pointer;
+	}
+
+	& button:active {
+		background-color: var(--color-style-3);
+		border-style: inset;
+		outline: none;
+		transform: translateY(0.2rem);
+		box-shadow: 0 2px 0 var(--text-color);
+	}
+
+	& button:focus {
+		outline: none;
+	}
+
+	& button:disabled {
+		background-color: var(--text-low);
+		cursor: default;
+		color: color-mix(in srgb, var(--text-negative), var(--pure-black) 90%);
+		transform: none;
+		box-shadow: none;
+	}
+
+	& button:disabled:hover {
+		background-color: var(--invalid-input);
+		color: var(--text-negative);
+		animation: shake 0.2s linear 0.2s infinite;
+	}
+
+	& input:disabled {
+		color: var(--text-low);
+	}
+
+	& input:invalid {
+		background-color: var(--invalid-input);
+		outline: 0.2rem solid
+			color-mix(in srgb, var(--color-style-3), var(--text-negative) 50%);
+	}
+
+	& input:focus {
+		outline: 0.2rem solid var(--color-style-1);
+	}
+
+	& .ok-group {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+
+		& label {
+			width: auto;
+		}
+	}
+
+	& #input-valid-ok {
+		font-weight: 700;
+		background-color: var(--valid-input);
+		color: var(--pure-black);
+		transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+	}
+
+	& .input-invalid-ok {
+		background-color: var(--invalid-input) !important;
+		color: var(--pure-white) !important;
+	}
+
+	& .total-hide {
+		opacity: 0;
+	}
+
+	& .total-show {
+		& p {
+			text-align: center;
+			color: var(--title-color);
+			text-shadow: 0 0 0.4rem var(--color-style-1);
+			min-height: 4.8rem;
+		}
+
+		& span {
+			font-size: 2.4rem;
+			font-weight: 700;
+			color: var(--title-color);
+			text-shadow: 0 0 0.4rem var(--color-style-1);
+		}
+	}
+}
+
+@keyframes shake {
+	0% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(1deg);
+	}
+	50% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(-1deg);
+	}
+}

@@ -3,28 +3,12 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>DT: Calculadora de Oficios</title>
-		<link
-			rel="shortcut icon"
-			href="./assets/images/favicon.svg"
-			type="image/x-icon"
-		/>
+		<title>Dofus Touch: Calculadora de Oficios</title>
+		<link rel="shortcut icon" href="favicon.svg" type="image/x-icon" />
 
-		<link rel="stylesheet" href="./styles/style.css" />
-
-		<link
-			rel="stylesheet"
-			media="(prefers-color-scheme: light)"
-			href="./styles/light.css"
-		/>
-		<link
-			rel="stylesheet"
-			media="(prefers-color-scheme: dark)"
-			href="./styles/dark.css"
-		/>
-
-		<script type="module" src="./scripts/index.js"></script>
-		<script type="module" src="./scripts/theme-toggle.js"></script>
+		<link rel="stylesheet" href="./src/styles/style.css" />
+		<script type="module" src="./src/scripts/main.js"></script>
+		<script type="module" src="./src/scripts/toggle.js"></script>
 	</head>
 	<body>
 		<main>
@@ -34,8 +18,8 @@
 					<nav>
 						<ul>
 							<li>
-								<div class="theme-toggle">
-									<div class="toggle"></div>
+								<div id="toggle">
+									<div id="toggle-switch"></div>
 								</div>
 							</li>
 						</ul>
