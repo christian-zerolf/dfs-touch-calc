@@ -1,5 +1,6 @@
 import { data } from "./data";
 
+const $calculator = document.querySelector("#calculator");
 const $currentLevel = document.querySelector("#input-current-level");
 const $currentExp = document.querySelector("#input-current-exp");
 const $targetLevel = document.querySelector("#input-target-level");
@@ -11,7 +12,7 @@ const $neededExp = document.querySelector("#input-needed-exp");
 
 const $craftExp = document.querySelector("#input-craft-exp");
 
-const $validOk = document.querySelector("#input-valid-ok");
+const $statusIndicator = document.querySelector("#status-indicator");
 const $statusMessage = document.querySelector(".status-message");
 
 const $total = document.querySelector("#input-total");
@@ -31,7 +32,7 @@ const getTargetExp = (value) => {
   return targetExp;
 };
 
-const validateOk = (slot, target, level, exp) => {
+const validateStatus = (slot, target, level, exp) => {
   if (
     isNaN(slot) ||
     isNaN(target) ||
@@ -44,16 +45,19 @@ const validateOk = (slot, target, level, exp) => {
     level < 1 ||
     level > 99
   ) {
-    $validOk.value = "ERROR";
-    $validOk.classList.add("input-invalid-ok");
+    $statusIndicator.value = "ERROR";
+    $statusIndicator.classList.remove("status-ok");
+    $statusIndicator.classList.add("status-error");
     $statusMessage.textContent = "Por favor, verifica todos los campos";
   } else if (level >= target) {
-    $validOk.value = "ERROR";
-    $validOk.classList.add("input-invalid-ok");
+    $statusIndicator.value = "ERROR";
+    $statusIndicator.classList.remove("status-ok");
+    $statusIndicator.classList.add("status-error");
     $statusMessage.textContent = "El nivel de oficio objetivo debe ser mayor al actual";
   } else if ((target > 80 && slot < 4) || (target > 60 && slot < 3) || (target > 40 && slot < 2)) {
-    $validOk.value = "ERROR";
-    $validOk.classList.add("input-invalid-ok");
+    $statusIndicator.value = "ERROR";
+    $statusIndicator.classList.remove("status-ok");
+    $statusIndicator.classList.add("status-error");
     $statusMessage.textContent = "Cantidad de Ranuras en la receta es muy bajo";
   } else if (
     (level < 80 && slot >= 7) ||
@@ -62,25 +66,31 @@ const validateOk = (slot, target, level, exp) => {
     (level < 20 && slot >= 4) ||
     (level < 10 && slot >= 3)
   ) {
-    $validOk.value = "ERROR";
-    $validOk.classList.add("input-invalid-ok");
+    $statusIndicator.value = "ERROR";
+    $statusIndicator.classList.remove("status-ok");
+    $statusIndicator.classList.add("status-error");
     $statusMessage.textContent = "Tu nivel de Oficio no te permite fabricar esta receta";
   } else if (
     $currentExp.value < data.expData[$currentLevel.value] ||
     $currentExp.value >= data.expData[$targetLevel.value] ||
     $currentExp.value >= data.expData[parseInt($currentLevel.value) + 1]
   ) {
-    $validOk.value = "ERROR";
-    $validOk.classList.add("input-invalid-ok");
+    $statusIndicator.value = "ERROR";
+    $statusIndicator.classList.remove("status-ok");
+    $statusIndicator.classList.add("status-error");
     $statusMessage.textContent = "Revisa tu experiencia o nivel de oficio";
   } else {
-    $validOk.value = "OK";
-    $validOk.classList.remove("input-invalid-ok");
+    $statusIndicator.value = "OK";
+    $statusIndicator.classList.remove("status-error");
+    $statusIndicator.classList.add("status-ok");
     $statusMessage.textContent = "Valores validos para calcular";
   }
 };
 
 const updateAll = () => {
+  $divTotal.classList.add("total-hide");
+  $divTotal.classList.remove("total-show");
+
   const currentLevel = parseInt($currentLevel.value);
   const slots = parseInt($slots.value);
   const targetValue = parseInt($targetLevel.value);
@@ -88,7 +98,7 @@ const updateAll = () => {
 
   getNeededExp(currentExp, getTargetExp(targetValue));
 
-  validateOk(slots, targetValue, currentLevel, currentExp);
+  validateStatus(slots, targetValue, currentLevel, currentExp);
 
   if ($bonus.checked) {
     $craftExp.value = data.expByBonus[slots - 2] || 0;
@@ -96,7 +106,7 @@ const updateAll = () => {
     $craftExp.value = data.expBySlot[slots - 2] || 0;
   }
 
-  $calculateButton.disabled = $validOk.value === "ERROR";
+  $calculateButton.disabled = $statusIndicator.value === "ERROR";
 };
 
 const showTotalDiv = () => {
@@ -113,7 +123,7 @@ const calculateTotal = () => {
     total <= 0 ||
     isNaN(total) ||
     total === Infinity ||
-    $validOk.value === "ERROR"
+    $statusIndicator.value === "ERROR"
   ) {
     $divTotal.classList.add("total-hide");
     $divTotal.classList.remove("total-show");
@@ -122,16 +132,26 @@ const calculateTotal = () => {
   }
 };
 
-$currentLevel.addEventListener("input", () => {
-  $currentExp.value = data.expData[$currentLevel.value];
-  updateAll();
-});
-$currentExp.addEventListener("input", updateAll);
-$targetLevel.addEventListener("input", updateAll);
-$slots.addEventListener("input", updateAll);
-$bonus.addEventListener("change", updateAll);
-
 $calculateButton.addEventListener("click", calculateTotal);
+
+$calculator.addEventListener("input", (e) => {
+  const target = e.target;
+
+  if (target.classList.contains("calculator-input") || target.type === "checkbox") {
+    if (target.id === "input-current-level") {
+      $currentExp.value = data.expData[target.value] || 0;
+    }
+
+    //   if (
+    //   target.classList.contains("calculator-input") ||
+    //   target.classList.contains("calculator-input-bonus")
+    // ) {
+    //   updateAll();
+    // }
+
+    updateAll();
+  }
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   updateAll();

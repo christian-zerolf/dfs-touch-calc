@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (isDarkMode) {
     $body.classList.add("dark");
-  } else {
     $toggle.classList.add("active");
   }
 
