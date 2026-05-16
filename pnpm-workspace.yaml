@@ -1,0 +1,10 @@
+blockExoticSubdeps: true
+autoInstallPeers: false
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - vite
+trustPolicy: no-downgrade
+strictPeerDependencies: true
+strictDepBuilds: true
+allowBuilds:
+  esbuild: true
